@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 
@@ -50,7 +51,10 @@ function Login() {
         <button>Log In</button>
       </Form>
 
-      <p>Not yet registered? Sign-up</p>
+      <p>
+        Not yet registered?
+        <Link to="/signup">Sign-up</Link>
+      </p>
     </FormContainer>
   )
 }
@@ -68,6 +72,10 @@ const FormContainer = styled.div`
 
   p {
     text-align: center;
+  }
+
+  a {
+    margin-left: 5px
   }
 `
 
