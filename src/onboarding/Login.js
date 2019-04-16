@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 
-function Login() {
+function Login(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -23,6 +23,7 @@ function Login() {
     } catch (error) {
       console.error(error)
     }
+    props.history.push('/trips')
   }
 
   return (
@@ -75,7 +76,7 @@ const FormContainer = styled.div`
   }
 
   a {
-    margin-left: 5px
+    margin-left: 5px;
   }
 `
 

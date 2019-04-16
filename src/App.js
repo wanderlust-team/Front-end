@@ -10,7 +10,7 @@ function App() {
     <>
       <Route exact path="/" component={Login} />
       <Route path="/signup" component={Signup} />
-      <Cards />
+      <Route path="/trips" component={Cards} />
     </>
   )
 }
