@@ -1,13 +1,14 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 
-import Login from './Login'
-import Signup from './Signup'
+import Login from './onboarding/Login'
+import Signup from './onboarding/Signup'
 
 function App() {
   return (
     <>
-      <Login />
-      <Signup />
+      <Route exact path="/" component={Login} />
+      <Route path="/signup" component={Signup} />
     </>
   )
 }
