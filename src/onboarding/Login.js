@@ -1,15 +1,26 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 function Login() {
   const [username, setUsername] = useState('')
-  const handleUsername = e => setUsername(e.target.value)
-
   const [password, setPassword] = useState('')
-  const handlePassword = e => setPassword(e.target.value)
 
-  const submitLogin = e => {
+  const submitLogin = async e => {
     e.preventDefault()
-    console.log('Login successful')
+
+    const user = {
+      username,
+      password
+    }
+
+    try {
+      await axios.post(
+        'https://build-week-wanderlust.herokuapp.com/api/auth/login',
+        user
+      )
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -22,7 +33,7 @@ function Login() {
           <input
             type="text"
             value={username}
-            onChange={handleUsername}
+            onChange={e => setUsername(e.target.value)}
             required
           />
         </label>
@@ -32,7 +43,7 @@ function Login() {
           <input
             type="password"
             value={password}
-            onChange={handlePassword}
+            onChange={e => setPassword(e.target.value)}
             required
           />
         </label>

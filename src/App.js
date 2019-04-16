@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Login from './Login'
-import Signup from './Signup'
+import Login from './onboarding/Login'
+import Signup from './onboarding/Signup'
 import CheckoutTourist from './cart/CheckoutTourist'
 import CheckoutGuide from './cart/CheckoutGuide'
 
@@ -10,8 +10,8 @@ function App() {
     <>
       <Login />
       <Signup />
-      <CheckoutTourist />
-      <CheckoutGuide />
+      {/* <CheckoutTourist /> */}
+      {/* <CheckoutGuide /> */}
     </>
   )
 }
