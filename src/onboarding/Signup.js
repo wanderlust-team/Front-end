@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 
-function Signup() {
+function Signup(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
@@ -19,10 +19,12 @@ function Signup() {
     }
 
     try {
-      await axios.post(
+      const response = await axios.post(
         'https://build-week-wanderlust.herokuapp.com/api/auth/register',
         newUser
       )
+      localStorage.setItem('token', response.data.token)
+      props.history.push('/trips')
     } catch (error) {
       console.error(error)
     }
