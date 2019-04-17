@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 import Calendar from 'react-calendar'
 
-function CheckoutGuide() {
+function CreateTrip() {
   const today = new Date()
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [dates, setDates] = useState([today, today])
 
-  const submitCreateTour = e => {
+  const submitCreateTrip = e => {
     e.preventDefault()
     console.log('Create tour successful')
   }
 
   return (
-    <form onSubmit={submitCreateTour}>
+    <form onSubmit={submitCreateTrip}>
       <label>
         Title
         <input
@@ -41,9 +41,9 @@ function CheckoutGuide() {
         />
       </label>
 
-      <button>Create Tour</button>
+      <button>Create Trip</button>
     </form>
   )
 }
 
-export default CheckoutGuide
+export default CreateTrip

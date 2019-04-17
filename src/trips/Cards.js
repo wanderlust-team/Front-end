@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-function Cards() {
+import Navigation from '../navigation/Navigation'
+
+function Cards(props) {
   const [trips, setTrips] = useState([])
 
   useEffect(() => {
@@ -18,12 +20,17 @@ function Cards() {
     getTrips()
   }, [])
 
-  return trips.map(trip => (
-    <div key={trip.id}>
-      <p>{trip.tripName}</p>
-      <p>{trip.location}</p>
-    </div>
-  ))
+  return (
+    <>
+      <Navigation {...props} />
+      {trips.map(trip => (
+        <div key={trip.id}>
+          <p>{trip.tripName}</p>
+          <p>{trip.location}</p>
+        </div>
+      ))}
+    </>
+  )
 }
 
 export default Cards

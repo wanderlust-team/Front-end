@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Calendar from 'react-calendar'
 
-function CheckoutTourist() {
+function BookTrip() {
   const today = new Date()
 
   const [checkIn, setCheckIn] = useState(today)
@@ -44,9 +44,9 @@ function CheckoutTourist() {
         />
       </label>
 
-      <button>Book Tour</button>
+      <button>Book Trip</button>
     </form>
   )
 }
 
-export default CheckoutTourist
+export default BookTrip
