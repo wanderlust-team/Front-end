@@ -6,7 +6,7 @@ function Signup(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
-  const [role, setRole] = useState('tourist')
+  const [isGuide, setIsGuide] = useState(false)
 
   const submitSignup = async e => {
     e.preventDefault()
@@ -15,7 +15,7 @@ function Signup(props) {
       username,
       password,
       email,
-      userType: role
+      guide: isGuide
     }
 
     try {
@@ -41,7 +41,6 @@ function Signup(props) {
           required
         />
       </label>
-
       <label>
         Password
         <input
@@ -51,7 +50,6 @@ function Signup(props) {
           required
         />
       </label>
-
       <label>
         E-mail
         <input
@@ -61,14 +59,15 @@ function Signup(props) {
           required
         />
       </label>
-
-      <label>
+      {/* <label>
         You are a
         <select onChange={e => setRole(e.target.value)} required>
           <option value="tourist">tourist</option>
           <option value="guide">guide</option>
         </select>
-      </label>
+      </label> */}
+      Check this box if you are a guide{' '}
+      <input type="checkbox" onChange={() => setIsGuide(!isGuide)} />
 
       <button>Create Account</button>
     </Form>
