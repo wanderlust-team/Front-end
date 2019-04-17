@@ -9,8 +9,14 @@ function Cards(props) {
   useEffect(() => {
     const getTrips = async () => {
       try {
+        const options = {
+          headers: {
+            Authorization: localStorage.getItem('token')
+          }
+        }
         const response = await axios.get(
-          'https://build-week-wanderlust.herokuapp.com/api/trips'
+          'https://build-week-wanderlust.herokuapp.com/api/trips',
+          options
         )
         setTrips(response.data)
       } catch (error) {
