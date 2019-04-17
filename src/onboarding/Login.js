@@ -17,15 +17,16 @@ function Login(props) {
     }
 
     try {
-      await axios.post(
+      const response = await axios.post(
         'https://build-week-wanderlust.herokuapp.com/api/auth/login',
         user
       )
+      localStorage.setItem('token', response.data.token)
+      props.history.push('/trips')
     } catch (error) {
       console.error(error)
       setMessage(error.response.data.message)
     }
-    // props.history.push('/trips')
   }
 
   return (
