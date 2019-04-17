@@ -24,6 +24,7 @@ function Signup(props) {
         newUser
       )
       localStorage.setItem('token', response.data.token)
+      localStorage.setItem('userId', response.data.user)
       props.history.push('/trips')
     } catch (error) {
       console.error(error)
@@ -68,7 +69,6 @@ function Signup(props) {
       </label> */}
       Check this box if you are a guide{' '}
       <input type="checkbox" onChange={() => setIsGuide(!isGuide)} />
-
       <button>Create Account</button>
     </Form>
   )

@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom'
 import Login from './onboarding/Login'
 import Signup from './onboarding/Signup'
 import Cards from './trips/Cards'
-import CreateTrip from './guide/CreateTrip';
+import CreateTrip from './guide/CreateTrip'
 
 function PrivateRoute({ component: Component, ...rest }) {
   return (

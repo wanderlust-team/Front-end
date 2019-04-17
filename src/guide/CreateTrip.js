@@ -1,16 +1,45 @@
 import React, { useState } from 'react'
+import axios from 'axios'
+import moment from 'moment'
 import Calendar from 'react-calendar'
 
-function CreateTrip() {
+function CreateTrip(props) {
   const today = new Date()
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [dates, setDates] = useState([today, today])
+  const [location, setLocation] = useState('')
+  const [startDate, setStartDate] = useState(today)
+  const [endDate, setEndDate] = useState(today)
 
-  const submitCreateTrip = e => {
+  const submitCreateTrip = async e => {
     e.preventDefault()
-    console.log('Create tour successful')
+
+    const newTrip = {
+      tripName: title,
+      description,
+      location,
+      startDate: Number(moment(startDate).format('YYYYMMDD')),
+      endDate: Number(moment(endDate).format('YYYYMMDD')),
+      userId: localStorage.getItem('userId')
+    }
+
+    try {
+      const options = {
+        headers: {
+          Authorization: localStorage.getItem('token')
+        }
+      }
+
+      await axios.post(
+        'https://build-week-wanderlust.herokuapp.com/api/trips',
+        newTrip,
+        options
+      )
+      props.history.push('/trips')
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -31,13 +60,32 @@ function CreateTrip() {
       </label>
 
       <label>
-        Dates
+        Location
+        <input
+          onChange={e => setLocation(e.target.value)}
+          value={location}
+          type="text"
+          required
+        />
+      </label>
+
+      <label>
+        Depart
         <Calendar
           calendarType="US"
-          selectRange
-          onChange={date => setDates(date)}
-          value={dates}
+          onChange={date => setStartDate(date)}
+          value={startDate}
           minDate={today}
+        />
+      </label>
+
+      <label>
+        Return
+        <Calendar
+          calendarType="US"
+          onChange={date => setEndDate(date)}
+          value={endDate}
+          minDate={startDate}
         />
       </label>
 

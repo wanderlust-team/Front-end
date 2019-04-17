@@ -30,14 +30,19 @@ function Cards(props) {
   return (
     <>
       <Navigation {...props} />
-      <CardsContainer>
-        {trips.map(trip => (
-          <Card key={trip.id}>
-            <Name>{trip.tripName}</Name>
-            <Location>{trip.location}</Location>
-          </Card>
-        ))}
-      </CardsContainer>
+
+      {trips ? (
+        <CardsContainer>
+          {trips.map(trip => (
+            <Card key={trip.id}>
+              <Name>{trip.tripName}</Name>
+              <Location>{trip.location}</Location>
+            </Card>
+          ))}
+        </CardsContainer>
+      ) : (
+        'Looks like there are no trips yet. Would you like to create one?'
+      )}
     </>
   )
 }

@@ -22,6 +22,7 @@ function Login(props) {
         user
       )
       localStorage.setItem('token', response.data.token)
+      localStorage.setItem('userId', response.data.user)
       props.history.push('/trips')
     } catch (error) {
       console.error(error)
