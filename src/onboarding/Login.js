@@ -6,6 +6,7 @@ import styled from 'styled-components'
 function Login(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('')
 
   const submitLogin = async e => {
     e.preventDefault()
@@ -22,12 +23,14 @@ function Login(props) {
       )
     } catch (error) {
       console.error(error)
+      setMessage(error.response.data.message)
     }
-    props.history.push('/trips')
+    // props.history.push('/trips')
   }
 
   return (
     <FormContainer>
+      <Message>{message}</Message>
       <Form onSubmit={submitLogin}>
         <label>
           Username
@@ -78,6 +81,12 @@ const FormContainer = styled.div`
   a {
     margin-left: 5px;
   }
+`
+
+const Message = styled.p`
+  height: 50px;
+  text-align: center;
+  color: red;
 `
 
 const Form = styled.form`
