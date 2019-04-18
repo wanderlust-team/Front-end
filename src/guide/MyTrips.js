@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import styled from 'styled-components'
@@ -11,9 +10,11 @@ import image from '../assets/manuel-meurisse-unsplash.jpg'
 
 function MyTrips(props) {
   const [trips, setTrips] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const getTrips = async () => {
+      setIsLoading(true)
       try {
         const options = {
           headers: {
@@ -25,14 +26,18 @@ function MyTrips(props) {
           options
         )
         setTrips(response.data)
+        setIsLoading(false)
       } catch (error) {
         console.error(error)
+        setIsLoading(false)
       }
     }
     getTrips()
   }, [])
 
   const deleteTrip = async tripId => {
+    setIsLoading(true)
+
     try {
       const options = {
         headers: {
@@ -43,9 +48,11 @@ function MyTrips(props) {
         `https://build-week-wanderlust.herokuapp.com/api/trips/${tripId}`,
         options
       )
-      props.history.push('/guide')
+      setTrips(trips.filter(trip => trip.id !== tripId))
+      setIsLoading(false)
     } catch (error) {
       console.error(error)
+      setIsLoading(false)
     }
   }
 
@@ -58,31 +65,27 @@ function MyTrips(props) {
       <Navigation {...props} />
 
       <CardsContainer>
-        {trips.length === 0 ? (
-          <Spinner9 size="42" />
-        ) : (
-          myTrips.map(trip => (
-            <Link
-              to={`/trips/${trip.id}`}
-              key={trip.id}
-              style={{ textDecoration: 'none' }}
-            >
-              <Card>
-                <img
-                  src={image}
-                  alt="woman sitting on cliff overlooking body of water near mountains during daytime"
-                />
-                <Name>{trip.tripName}</Name>
-                <Location>
-                  <Map size="18" />
-                  {trip.location}
-                </Location>
-                <button>Edit</button>
-                <button onClick={() => deleteTrip(trip.id)}>Delete</button>
-              </Card>
-            </Link>
-          ))
-        )}
+        {isLoading && <Spinner9 size="42" />}
+
+        {myTrips.map(trip => (
+          <Card key={trip.id}>
+            <img
+              src={image}
+              alt="woman sitting on cliff overlooking body of water near mountains during daytime"
+            />
+            <Name>{trip.tripName}</Name>
+            <Location>
+              <Map size="18" />
+              {trip.location}
+            </Location>
+            <button>Edit</button>
+            <button onClick={() => deleteTrip(trip.id)}>Delete</button>
+          </Card>
+        ))}
+
+        {!isLoading &&
+          !myTrips.length &&
+          'You have no trips. Would you like to create one?'}
       </CardsContainer>
     </>
   )
