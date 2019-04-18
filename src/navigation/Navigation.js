@@ -63,14 +63,26 @@ const Header = styled.header`
 const CreateTripLink = styled(Link)`
   text-decoration: none;
   color: black;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
-    padding-bottom: 10px;
-    border-bottom: 1px solid mediumseagreen;
+    border-bottom: 3px solid slategray;
   }
 `
 
 const StyledPersonPin = styled(PersonPin)`
   cursor: pointer;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    border-bottom: 3px solid slategray;
+  }
 `
 
 const MenuContainer = styled.div`
