@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 
+import LogoHeader from '../navigation/LogoHeader'
+
 function Signup(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -32,38 +34,45 @@ function Signup(props) {
   }
 
   return (
-    <Form onSubmit={submitSignup}>
-      <label>
-        Username
-        <input
-          type="text"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        E-mail
-        <input
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      Check this box if you are a guide
-      <input type="checkbox" onChange={() => setIsGuide(!isGuide)} />
-      <button>Create Account</button>
-    </Form>
+    <>
+      <LogoHeader />
+      <Form onSubmit={submitSignup}>
+        <label>
+          Username
+          <input
+            type="text"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          E-mail
+          <input
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+          />
+        </label>
+
+        <CheckboxContainer>
+          <input type="checkbox" onChange={() => setIsGuide(!isGuide)} /> Check
+          this box if you are a guide
+        </CheckboxContainer>
+
+        <button>Create Account</button>
+      </Form>
+    </>
   )
 }
 
@@ -90,15 +99,6 @@ const Form = styled.form`
     outline: none;
   }
 
-  select {
-    background: transparent;
-    height: 30px;
-    width: 100px;
-    margin: 10px;
-    cursor: pointer;
-    outline: none;
-  }
-
   button {
     height: 50px;
     width: 380px;
@@ -111,5 +111,15 @@ const Form = styled.form`
     border: 1px solid mediumseagreen;
     border-radius: 5px;
     cursor: pointer;
+  }
+`
+
+const CheckboxContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  input {
+    width: 20px;
+    margin-right: 5px;
   }
 `

@@ -128,7 +128,7 @@ const Form = styled.div`
     width: 600px;
     height: 200px;
     margin: 10px 0;
-    padding: 0 10px;
+    padding: 10px;
     box-sizing: border-box;
     resize: none;
     outline: none;

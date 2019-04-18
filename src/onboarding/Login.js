@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 
+import LogoHeader from '../navigation/LogoHeader'
+
 function Login(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -31,37 +33,40 @@ function Login(props) {
   }
 
   return (
-    <FormContainer>
-      <Message>{message}</Message>
-      <Form onSubmit={submitLogin}>
-        <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-            required
-          />
-        </label>
+    <>
+      <LogoHeader />
+      <FormContainer>
+        <Message>{message}</Message>
+        <Form onSubmit={submitLogin}>
+          <label>
+            Username
+            <input
+              type="text"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              required
+            />
+          </label>
 
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
-        </label>
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+            />
+          </label>
 
-        <button>Log In</button>
-      </Form>
+          <button>Log In</button>
+        </Form>
 
-      <p>
-        Not yet registered?
-        <Link to="/signup">Sign-up</Link>
-      </p>
-    </FormContainer>
+        <p>
+          Not yet registered?
+          <Link to="/signup">Sign-up</Link>
+        </p>
+      </FormContainer>
+    </>
   )
 }
 
