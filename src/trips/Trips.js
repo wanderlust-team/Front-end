@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import Navigation from '../navigation/Navigation'
 
-function Cards(props) {
+function Trips(props) {
   const [trips, setTrips] = useState([])
 
   useEffect(() => {
@@ -53,7 +53,7 @@ function Cards(props) {
   )
 }
 
-export default Cards
+export default Trips
 
 const CardsContainer = styled.div`
   display: flex;
