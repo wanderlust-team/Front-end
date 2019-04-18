@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 
@@ -31,18 +32,23 @@ function Cards(props) {
     <>
       <Navigation {...props} />
 
-      {trips ? (
-        <CardsContainer>
-          {trips.map(trip => (
-            <Card key={trip.id}>
+      <CardsContainer>
+        {trips.map(trip => (
+          <Link
+            to={`/trips/${trip.id}`}
+            key={trip.id}
+            style={{ textDecoration: 'none' }}
+          >
+            <Card>
               <Name>{trip.tripName}</Name>
-              <Location>{trip.location}</Location>
+              <Location>
+                <i className="fas fa-map-marker" />
+                {trip.location}
+              </Location>
             </Card>
-          ))}
-        </CardsContainer>
-      ) : (
-        'Looks like there are no trips yet. Would you like to create one?'
-      )}
+          </Link>
+        ))}
+      </CardsContainer>
     </>
   )
 }

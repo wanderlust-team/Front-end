@@ -5,6 +5,7 @@ import Login from './onboarding/Login'
 import Signup from './onboarding/Signup'
 import Cards from './trips/Cards'
 import CreateTrip from './guide/CreateTrip'
+import TripDetail from './trips/TripDetail'
 
 function PrivateRoute({ component: Component, ...rest }) {
   return (
@@ -26,8 +27,9 @@ function App() {
     <>
       <Route exact path="/" component={Login} />
       <Route path="/signup" component={Signup} />
-      <PrivateRoute path="/trips" component={Cards} />
+      <PrivateRoute exact path="/trips" component={Cards} />
       <PrivateRoute path="/create-trip" component={CreateTrip} />
+      <PrivateRoute exact path="/trips/:id" component={TripDetail} />
     </>
   )
 }
