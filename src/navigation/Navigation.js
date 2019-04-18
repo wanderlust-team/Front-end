@@ -29,7 +29,7 @@ function Navigation({ history }) {
 
       {isOpen && (
         <MenuContainer>
-          <p>My Trips</p>
+          <Link to="/guide">My Trips</Link>
           <p onClick={() => logout()}>Logout</p>
         </MenuContainer>
       )}

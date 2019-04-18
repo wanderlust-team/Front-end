@@ -6,6 +6,7 @@ import Signup from './onboarding/Signup'
 import Trips from './trips/Trips'
 import CreateTrip from './guide/CreateTrip'
 import TripDetail from './trips/TripDetail'
+import MyTrips from './guide/MyTrips'
 
 function PrivateRoute({ component: Component, ...rest }) {
   return (
@@ -30,6 +31,7 @@ function App() {
       <PrivateRoute exact path="/trips" component={Trips} />
       <PrivateRoute path="/create-trip" component={CreateTrip} />
       <PrivateRoute exact path="/trips/:id" component={TripDetail} />
+      <PrivateRoute exact path="/guide" component={MyTrips} />
     </>
   )
 }

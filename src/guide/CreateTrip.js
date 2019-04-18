@@ -103,7 +103,7 @@ function CreateTrip(props) {
 
 export default CreateTrip
 
-const Form = styled.div`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
