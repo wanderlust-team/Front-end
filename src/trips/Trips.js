@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { startCase } from 'lodash'
 
 import styled from 'styled-components'
 import { Map } from 'styled-icons/boxicons-regular'
@@ -53,10 +54,10 @@ function Trips(props) {
                 src={image}
                 alt="woman sitting on cliff overlooking body of water near mountains during daytime"
               />
-              <Name>{trip.tripName}</Name>
+              <Name>{startCase(trip.tripName)}</Name>
               <Location>
                 <Map size="18" />
-                {trip.location}
+                {startCase(trip.location)}
               </Location>
             </Card>
           </Link>
@@ -102,4 +103,7 @@ const Name = styled.p`
 
 const Location = styled.p`
   color: slategray;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
