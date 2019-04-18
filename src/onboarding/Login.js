@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 
-function Login() {
+import LogoHeader from '../navigation/LogoHeader'
+
+function Login(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('')
 
   const submitLogin = async e => {
     e.preventDefault()
@@ -16,46 +19,54 @@ function Login() {
     }
 
     try {
-      await axios.post(
+      const response = await axios.post(
         'https://build-week-wanderlust.herokuapp.com/api/auth/login',
         user
       )
+      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('userId', response.data.user)
+      props.history.push('/trips')
     } catch (error) {
       console.error(error)
+      setMessage(error.response.data.message)
     }
   }
 
   return (
-    <FormContainer>
-      <Form onSubmit={submitLogin}>
-        <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-            required
-          />
-        </label>
+    <>
+      <LogoHeader />
+      <FormContainer>
+        <Message>{message}</Message>
+        <Form onSubmit={submitLogin}>
+          <label>
+            Username
+            <input
+              type="text"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              required
+            />
+          </label>
 
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
-        </label>
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+            />
+          </label>
 
-        <button>Log In</button>
-      </Form>
+          <button>Log In</button>
+        </Form>
 
-      <p>
-        Not yet registered?
-        <Link to="/signup">Sign-up</Link>
-      </p>
-    </FormContainer>
+        <p>
+          Not yet registered?
+          <Link to="/signup">Sign-up</Link>
+        </p>
+      </FormContainer>
+    </>
   )
 }
 
@@ -66,7 +77,7 @@ const FormContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  height: 800px;
+  height: 600px;
   width: 400px;
   margin: auto;
 
@@ -75,8 +86,14 @@ const FormContainer = styled.div`
   }
 
   a {
-    margin-left: 5px
+    margin-left: 5px;
   }
+`
+
+const Message = styled.p`
+  height: 50px;
+  text-align: center;
+  color: red;
 `
 
 const Form = styled.form`
@@ -90,6 +107,8 @@ const Form = styled.form`
     height: 50px;
     margin: 10px 0;
     padding: 0 10px;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
     box-sizing: border-box;
     font-size: 18px;
     outline: none;
@@ -104,6 +123,8 @@ const Form = styled.form`
     font-weight: 500;
     color: white;
     background-color: mediumseagreen;
+    border: 1px solid mediumseagreen;
+    border-radius: 5px;
     cursor: pointer;
   }
 `
