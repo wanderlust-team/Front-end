@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { Map } from 'styled-icons/boxicons-regular'
 
 import Navigation from '../navigation/Navigation'
+import image from '../assets/manuel-meurisse-unsplash.jpg'
 
 function Trips(props) {
   const [trips, setTrips] = useState([])
@@ -42,6 +43,10 @@ function Trips(props) {
             style={{ textDecoration: 'none' }}
           >
             <Card>
+              <img
+                src={image}
+                alt="woman sitting on cliff overlooking body of water near mountains during daytime"
+              />
               <Name>{trip.tripName}</Name>
               <Location>
                 <Map size="18" />
@@ -67,17 +72,21 @@ const CardsContainer = styled.div`
 `
 
 const Card = styled.div`
-  border: 1px solid gainsboro;
-  height: 200px;
   width: 200px;
-  margin: 10px;
-  padding: 5px;
-  box-sizing: border-box;
+  margin: 15px;
   text-align: center;
+  
+  img {
+    width: 200px;
+  }
 `
 
 const Name = styled.p`
   font-weight: 600;
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 const Location = styled.p`
