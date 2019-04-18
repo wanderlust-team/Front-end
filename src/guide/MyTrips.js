@@ -32,6 +32,23 @@ function MyTrips(props) {
     getTrips()
   }, [])
 
+  const deleteTrip = async tripId => {
+    try {
+      const options = {
+        headers: {
+          Authorization: localStorage.getItem('token')
+        }
+      }
+      await axios.delete(
+        `https://build-week-wanderlust.herokuapp.com/api/trips/${tripId}`,
+        options
+      )
+      props.history.push('/guide')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const userId = localStorage.getItem('userId')
 
   const myTrips = trips.filter(trip => trip.userId === Number(userId))
@@ -60,6 +77,8 @@ function MyTrips(props) {
                   <Map size="18" />
                   {trip.location}
                 </Location>
+                <button>Edit</button>
+                <button onClick={() => deleteTrip(trip.id)}>Delete</button>
               </Card>
             </Link>
           ))
