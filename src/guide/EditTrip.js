@@ -128,11 +128,13 @@ function EditTrip(props) {
           />
         </label>
 
-        <button onClick={() => props.history.push('/guide')}>
-          Cancel
-        </button>
+        <ButtonsContainer>
+          <CancelButton onClick={() => props.history.push('/guide')}>
+            Cancel
+          </CancelButton>
 
-        <SaveButton>Save</SaveButton>
+          <SaveButton>Save</SaveButton>
+        </ButtonsContainer>
       </Form>
     </>
   )
@@ -175,10 +177,29 @@ const Form = styled.form`
   }
 `
 
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  width: 600px;
+  margin: 10px auto;
+`
+
+const CancelButton = styled.button`
+  height: 50px;
+  width: 200px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: slategray;
+  border: 3px solid slategray;
+  border-radius: 5px;
+  cursor: pointer;
+`
+
 const SaveButton = styled.button`
   height: 50px;
-  width: 400px;
-  margin: 10px auto;
+  width: 200px;
   outline: none;
   font-size: 18px;
   font-weight: 500;
