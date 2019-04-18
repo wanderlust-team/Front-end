@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import logo from '../assets/logo.png'
@@ -6,7 +7,9 @@ import logo from '../assets/logo.png'
 function LogoHeader() {
   return (
     <Header>
-      <img src={logo} alt="wanderlust logo" />
+      <Link to="/">
+        <img src={logo} alt="wanderlust logo" />
+      </Link>
     </Header>
   )
 }
