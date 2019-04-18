@@ -60,14 +60,7 @@ function Signup(props) {
           required
         />
       </label>
-      {/* <label>
-        You are a
-        <select onChange={e => setRole(e.target.value)} required>
-          <option value="tourist">tourist</option>
-          <option value="guide">guide</option>
-        </select>
-      </label> */}
-      Check this box if you are a guide{' '}
+      Check this box if you are a guide
       <input type="checkbox" onChange={() => setIsGuide(!isGuide)} />
       <button>Create Account</button>
     </Form>

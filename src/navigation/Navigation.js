@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+
 import styled from 'styled-components'
+import { PersonPin } from 'styled-icons/material'
 
 import logo from '../assets/logo.png'
 
@@ -18,11 +20,7 @@ function Navigation({ history }) {
         <img src={logo} alt="wanderlust logo" />
         <div>
           <StyledLink to="/create-trip">Create a Trip</StyledLink>
-          <i
-            className="fas fa-user-circle"
-            onClick={() => setIsOpen(!isOpen)}
-            style={{ fontSize: 35, cursor: 'pointer' }}
-          />
+          <StyledPersonPin size="36" onClick={() => setIsOpen(!isOpen)} />
         </div>
       </Header>
 
@@ -66,6 +64,10 @@ const StyledLink = styled(Link)`
     padding-bottom: 10px;
     border-bottom: 1px solid mediumseagreen;
   }
+`
+
+const StyledPersonPin = styled(PersonPin)`
+  cursor: pointer;
 `
 
 const MenuContainer = styled.div`

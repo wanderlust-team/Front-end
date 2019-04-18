@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+
 import styled from 'styled-components'
+import { Map } from 'styled-icons/boxicons-regular'
 
 import Navigation from '../navigation/Navigation'
 
@@ -42,7 +44,7 @@ function Trips(props) {
             <Card>
               <Name>{trip.tripName}</Name>
               <Location>
-                <i className="fas fa-map-marker" />
+                <Map size="18" />
                 {trip.location}
               </Location>
             </Card>
