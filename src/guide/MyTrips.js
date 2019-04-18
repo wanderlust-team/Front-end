@@ -5,6 +5,8 @@ import { startCase } from 'lodash'
 import styled from 'styled-components'
 import { Map } from 'styled-icons/boxicons-regular'
 import { Spinner9 } from 'styled-icons/icomoon'
+import { Trash } from 'styled-icons/boxicons-regular'
+import { Edit } from 'styled-icons/boxicons-regular'
 
 import Navigation from '../navigation/Navigation'
 import image from '../assets/manuel-meurisse-unsplash.jpg'
@@ -74,18 +76,20 @@ function MyTrips(props) {
               src={image}
               alt="woman sitting on cliff overlooking body of water near mountains during daytime"
             />
+
             <Name>{startCase(trip.tripName)}</Name>
+
             <Location>
               <Map size="18" />
               {startCase(trip.location)}
             </Location>
 
-            <button
+            <StyledEdit
+              size="22"
               onClick={() => props.history.push(`/guide/edit/${trip.id}`)}
-            >
-              Edit
-            </button>
-            <button onClick={() => deleteTrip(trip.id)}>Delete</button>
+            />
+
+            <StyledTrash size="22" onClick={() => deleteTrip(trip.id)} />
           </Card>
         ))}
 
@@ -109,6 +113,20 @@ const CardsContainer = styled.div`
   margin: auto;
 `
 
+const StyledEdit = styled(Edit)`
+  color: slategray;
+  cursor: pointer;
+  margin-right: 5px;
+  visibility: hidden;
+`
+
+const StyledTrash = styled(Trash)`
+  color: lightcoral;
+  cursor: pointer;
+  margin-left: 5px;
+  visibility: hidden;
+`
+
 const Card = styled.div`
   width: 200px;
   margin: 15px;
@@ -116,6 +134,14 @@ const Card = styled.div`
 
   img {
     width: 200px;
+  }
+
+  &:hover ${StyledEdit} {
+    visibility: visible;
+  }
+
+  &:hover ${StyledTrash} {
+    visibility: visible;
   }
 `
 

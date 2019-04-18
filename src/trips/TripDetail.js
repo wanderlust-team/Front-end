@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import moment from 'moment'
+import { startCase } from 'lodash'
 
 import styled from 'styled-components'
 import { Map } from 'styled-icons/boxicons-regular'
@@ -45,12 +46,12 @@ function TripDetail(props) {
         />
 
         <div>
-          <h1>{trip.tripName}</h1>
+          <h1>{startCase(trip.tripName)}</h1>
 
           <Summary>
             <p>
               <StyledMap size="24" />
-              {trip.location}
+              {startCase(trip.location)}
             </p>
             <p>
               <StyledCalendar size="24" />
