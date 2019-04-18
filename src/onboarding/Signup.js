@@ -84,6 +84,7 @@ const Form = styled.form`
     margin: 10px 0;
     padding: 0 10px;
     border: 1px solid gainsboro;
+    border-radius: 5px;
     box-sizing: border-box;
     font-size: 18px;
     outline: none;
@@ -108,6 +109,7 @@ const Form = styled.form`
     color: white;
     background-color: mediumseagreen;
     border: 1px solid mediumseagreen;
+    border-radius: 5px;
     cursor: pointer;
   }
 `

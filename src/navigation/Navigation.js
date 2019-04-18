@@ -17,7 +17,10 @@ function Navigation({ history }) {
   return (
     <>
       <Header>
-        <img src={logo} alt="wanderlust logo" />
+        <Link to="/trips">
+          <img src={logo} alt="wanderlust logo" />
+        </Link>
+
         <div>
           <StyledLink to="/create-trip">Create a Trip</StyledLink>
           <StyledPersonPin size="36" onClick={() => setIsOpen(!isOpen)} />
