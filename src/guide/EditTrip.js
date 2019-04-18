@@ -68,7 +68,7 @@ function EditTrip(props) {
         newTrip,
         options
       )
-      props.history.push('/trips')
+      props.history.push('/guide')
     } catch (error) {
       console.error(error)
     }
@@ -129,11 +129,11 @@ function EditTrip(props) {
         </label>
 
         <ButtonsContainer>
-          <CancelButton onClick={() => props.history.push('/guide')}>
+          <CancelButton type="button" onClick={() => props.history.push('/guide')}>
             Cancel
           </CancelButton>
 
-          <SaveButton>Save</SaveButton>
+          <SaveButton type="submit">Save</SaveButton>
         </ButtonsContainer>
       </Form>
     </>
