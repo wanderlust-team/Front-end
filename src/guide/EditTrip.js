@@ -128,7 +128,11 @@ function EditTrip(props) {
           />
         </label>
 
-        <Button>Save Changes</Button>
+        <button onClick={() => props.history.push('/guide')}>
+          Cancel
+        </button>
+
+        <SaveButton>Save</SaveButton>
       </Form>
     </>
   )
@@ -171,7 +175,7 @@ const Form = styled.form`
   }
 `
 
-const Button = styled.button`
+const SaveButton = styled.button`
   height: 50px;
   width: 400px;
   margin: 10px auto;
