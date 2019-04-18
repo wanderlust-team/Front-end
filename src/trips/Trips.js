@@ -11,9 +11,11 @@ import image from '../assets/manuel-meurisse-unsplash.jpg'
 
 function Trips(props) {
   const [trips, setTrips] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const getTrips = async () => {
+      setIsLoading(true)
       try {
         const options = {
           headers: {
@@ -25,8 +27,10 @@ function Trips(props) {
           options
         )
         setTrips(response.data)
+        setIsLoading(false)
       } catch (error) {
         console.error(error)
+        setIsLoading(false)
       }
     }
     getTrips()
@@ -37,29 +41,30 @@ function Trips(props) {
       <Navigation {...props} />
 
       <CardsContainer>
-        {trips.length === 0 ? (
-          <Spinner9 size="42" />
-        ) : (
-          trips.map(trip => (
-            <Link
-              to={`/trips/${trip.id}`}
-              key={trip.id}
-              style={{ textDecoration: 'none' }}
-            >
-              <Card>
-                <img
-                  src={image}
-                  alt="woman sitting on cliff overlooking body of water near mountains during daytime"
-                />
-                <Name>{trip.tripName}</Name>
-                <Location>
-                  <Map size="18" />
-                  {trip.location}
-                </Location>
-              </Card>
-            </Link>
-          ))
-        )}
+        {isLoading && <Spinner9 size="42" />}
+        {trips.map(trip => (
+          <Link
+            to={`/trips/${trip.id}`}
+            key={trip.id}
+            style={{ textDecoration: 'none' }}
+          >
+            <Card>
+              <img
+                src={image}
+                alt="woman sitting on cliff overlooking body of water near mountains during daytime"
+              />
+              <Name>{trip.tripName}</Name>
+              <Location>
+                <Map size="18" />
+                {trip.location}
+              </Location>
+            </Card>
+          </Link>
+        ))}
+
+        {!isLoading &&
+          !trips.length &&
+          'There are no trips yet. Would you like to create one?'}
       </CardsContainer>
     </>
   )

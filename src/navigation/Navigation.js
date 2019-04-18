@@ -46,7 +46,7 @@ const Header = styled.header`
   height: 50px;
   padding: 15px 0;
   margin-bottom: 20px;
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid gainsboro;
 
   img {
     margin-left: 20px;
