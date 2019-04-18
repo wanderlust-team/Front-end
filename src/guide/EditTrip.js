@@ -35,7 +35,6 @@ function EditTrip(props) {
         setTitle(response.data.tripName)
         setDescription(response.data.description)
         setLocation(response.data.location)
-
       } catch (error) {
         console.error(error)
       }
@@ -92,7 +91,11 @@ function EditTrip(props) {
 
         <label>
           Description
-          <textarea onChange={e => setDescription(e.target.value)} required />
+          <textarea
+            onChange={e => setDescription(e.target.value)}
+            value={description}
+            required
+          />
         </label>
 
         <label>
