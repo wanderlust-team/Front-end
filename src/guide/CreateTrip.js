@@ -94,8 +94,17 @@ function CreateTrip(props) {
             minDate={startDate}
           />
         </label>
+        
+        <ButtonsContainer>
+          <CancelButton
+            type="button"
+            onClick={() => props.history.push('/trips')}
+          >
+            Cancel
+          </CancelButton>
 
-        <Button>Create Trip</Button>
+          <CreateButton type="submit">Create Trip</CreateButton>
+        </ButtonsContainer>
       </Form>
     </>
   )
@@ -138,10 +147,29 @@ const Form = styled.form`
   }
 `
 
-const Button = styled.button`
-  height: 50px;
-  width: 400px;
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  width: 600px;
   margin: 10px auto;
+`
+
+const CancelButton = styled.button`
+  height: 50px;
+  width: 200px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: slategray;
+  border: 3px solid slategray;
+  border-radius: 5px;
+  cursor: pointer;
+`
+
+const CreateButton = styled.button`
+  height: 50px;
+  width: 200px;
   outline: none;
   font-size: 18px;
   font-weight: 500;
