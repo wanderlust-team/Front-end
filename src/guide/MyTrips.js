@@ -78,7 +78,12 @@ function MyTrips(props) {
               <Map size="18" />
               {trip.location}
             </Location>
-            <button>Edit</button>
+
+            <button
+              onClick={() => props.history.push(`/guide/edit/${trip.id}`)}
+            >
+              Edit
+            </button>
             <button onClick={() => deleteTrip(trip.id)}>Delete</button>
           </Card>
         ))}
