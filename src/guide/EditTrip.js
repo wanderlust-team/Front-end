@@ -16,6 +16,8 @@ function EditTrip(props) {
   const [startDate, setStartDate] = useState(today)
   const [endDate, setEndDate] = useState(today)
 
+  const id = props.match.params.id
+
   useEffect(() => {
     const getTripById = async () => {
       try {
@@ -25,9 +27,7 @@ function EditTrip(props) {
           }
         }
         const response = await axios.get(
-          `https://build-week-wanderlust.herokuapp.com/api/trips/${
-            props.match.params.id
-          }`,
+          `https://build-week-wanderlust.herokuapp.com/api/trips/${id}`,
           options
         )
 
@@ -62,9 +62,7 @@ function EditTrip(props) {
       }
 
       await axios.put(
-        `https://build-week-wanderlust.herokuapp.com/api/trips/${
-          props.match.params.id
-        }`,
+        `https://build-week-wanderlust.herokuapp.com/api/trips/${id}`,
         newTrip,
         options
       )

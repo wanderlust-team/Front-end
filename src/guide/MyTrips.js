@@ -9,11 +9,13 @@ import { Trash } from 'styled-icons/boxicons-regular'
 import { Edit } from 'styled-icons/boxicons-regular'
 
 import Navigation from '../navigation/Navigation'
-import image from '../assets/manuel-meurisse-unsplash.jpg'
 
 function MyTrips(props) {
   const [trips, setTrips] = useState([])
+  const [images, setImages] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+
+  const page = 1
 
   useEffect(() => {
     const getTrips = async () => {
@@ -36,6 +38,27 @@ function MyTrips(props) {
       }
     }
     getTrips()
+  }, [])
+
+  useEffect(() => {
+    const getImages = async () => {
+      try {
+        const options = {
+          headers: {
+            Authorization:
+              'Client-ID 5afca5fc526442a0d2db270e57a9d099901cbacab46dadec1e806eab80312e53'
+          }
+        }
+        const response = await axios.get(
+          `https://api.unsplash.com/search/photos?query=wanderlust&orientation=portrait&page=${page}`,
+          options
+        )
+        setImages(response.data.results)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    getImages()
   }, [])
 
   const deleteTrip = async tripId => {
@@ -77,11 +100,11 @@ function MyTrips(props) {
       <CardsContainer>
         {isLoading && <Spinner9 size="42" />}
 
-        {myTrips.map(trip => (
+        {myTrips.map((trip, index) => (
           <Card key={trip.id}>
             <img
-              src={image}
-              alt="woman sitting on cliff overlooking body of water near mountains during daytime"
+              src={images[index % 10].urls.small}
+              alt={images[index % 10].alt_description}
             />
 
             <Name>{startCase(trip.tripName)}</Name>
@@ -140,12 +163,14 @@ const StyledTrash = styled(Trash)`
 `
 
 const Card = styled.div`
-  width: 200px;
+  width: 300px;
   margin: 15px;
   text-align: center;
 
   img {
-    width: 200px;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
   }
 
   &:hover ${StyledEdit} {
