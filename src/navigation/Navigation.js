@@ -105,9 +105,10 @@ const MenuContainer = styled.div`
     justify-content: center;
     margin: 0;
     cursor: pointer;
+    border-bottom: 1px solid gainsboro;
 
     &:hover {
-      background: whitesmoke;
+      border-bottom: 1px solid slategray;
     }
   }
 `
@@ -120,8 +121,9 @@ const MyTripsLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: 1px solid gainsboro;
 
   &:hover {
-    background-color: whitesmoke;
+    border-bottom: 1px solid slategray;
   }
 `

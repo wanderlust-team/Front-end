@@ -41,6 +41,11 @@ function Trips(props) {
     <>
       <Navigation {...props} />
 
+      <HeaderContainer>
+        <h1>Trips around the world</h1>
+        <p>Start exploring ideas for your next trip.</p>
+      </HeaderContainer>
+
       <CardsContainer>
         {isLoading && <Spinner9 size="42" />}
         {trips.map(trip => (
@@ -73,13 +78,18 @@ function Trips(props) {
 
 export default Trips
 
+const HeaderContainer = styled.div`
+  width: 1000px;
+  margin: 30px auto;
+  text-align: center;
+`
+
 const CardsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  width: 800px;
-  min-height: 800px;
+  width: 1000px;
   margin: auto;
 `
 

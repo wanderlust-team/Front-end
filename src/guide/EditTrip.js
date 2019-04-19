@@ -78,6 +78,8 @@ function EditTrip(props) {
     <>
       <Navigation {...props} />
 
+      <H1>Trip overview</H1>
+
       <Form onSubmit={submitEditTrip}>
         <label>
           Title
@@ -129,7 +131,10 @@ function EditTrip(props) {
         </label>
 
         <ButtonsContainer>
-          <CancelButton type="button" onClick={() => props.history.push('/guide')}>
+          <CancelButton
+            type="button"
+            onClick={() => props.history.push('/guide')}
+          >
             Cancel
           </CancelButton>
 
@@ -142,12 +147,17 @@ function EditTrip(props) {
 
 export default EditTrip
 
+const H1 = styled.h1`
+  width: 1000px;
+  margin: 30px auto;
+  text-align: center;
+`
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  min-height: 800px;
   width: 600px;
   margin: auto;
 

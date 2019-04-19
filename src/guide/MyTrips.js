@@ -67,6 +67,13 @@ function MyTrips(props) {
     <>
       <Navigation {...props} />
 
+      <HeaderContainer>
+        <h1>Places you've been</h1>
+        {myTrips.length === 1
+          ? `You've had ${myTrips.length} unique experience so far.`
+          : `You've had ${myTrips.length} unique experiences so far.`}
+      </HeaderContainer>
+
       <CardsContainer>
         {isLoading && <Spinner9 size="42" />}
 
@@ -103,13 +110,18 @@ function MyTrips(props) {
 
 export default MyTrips
 
+const HeaderContainer = styled.div`
+  width: 1000px;
+  margin: 30px auto;
+  text-align: center;
+`
+
 const CardsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  width: 800px;
-  min-height: 800px;
+  width: 1000px;
   margin: auto;
 `
 

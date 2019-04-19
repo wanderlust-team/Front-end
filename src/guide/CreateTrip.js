@@ -49,6 +49,11 @@ function CreateTrip(props) {
     <>
       <Navigation {...props} />
 
+      <HeaderContainer>
+        <h1>Plan your next experience</h1>
+        <p>Make new friends and don't forget to invite the existing ones!</p>
+      </HeaderContainer>
+
       <Form onSubmit={submitCreateTrip}>
         <label>
           Title
@@ -94,7 +99,7 @@ function CreateTrip(props) {
             minDate={startDate}
           />
         </label>
-        
+
         <ButtonsContainer>
           <CancelButton
             type="button"
@@ -111,6 +116,12 @@ function CreateTrip(props) {
 }
 
 export default CreateTrip
+
+const HeaderContainer = styled.div`
+  width: 1000px;
+  margin: 30px auto;
+  text-align: center;
+`
 
 const Form = styled.form`
   display: flex;
