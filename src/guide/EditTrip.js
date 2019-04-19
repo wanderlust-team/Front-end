@@ -202,7 +202,7 @@ const CancelButton = styled.button`
   font-size: 18px;
   font-weight: 500;
   color: slategray;
-  border: 3px solid slategray;
+  border: 2px solid slategray;
   border-radius: 5px;
   cursor: pointer;
 `
@@ -214,8 +214,8 @@ const SaveButton = styled.button`
   font-size: 18px;
   font-weight: 500;
   color: white;
-  background-color: mediumseagreen;
-  border: 1px solid mediumseagreen;
+  background-color: #d14545;
+  background-image: linear-gradient(to right, #d14545, #ff9933);
   border-radius: 5px;
   cursor: pointer;
 `
