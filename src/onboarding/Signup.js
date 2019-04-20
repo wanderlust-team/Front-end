@@ -67,7 +67,7 @@ function Signup(props) {
 
         <CheckboxContainer>
           <input type="checkbox" onChange={() => setIsGuide(!isGuide)} /> Check
-          this box if you are a guide
+          this box if you are a tour guide
         </CheckboxContainer>
 
         <button>Create Account</button>
@@ -107,8 +107,8 @@ const Form = styled.form`
     font-size: 18px;
     font-weight: 500;
     color: white;
-    background-color: mediumseagreen;
-    border: 1px solid mediumseagreen;
+    background-color: #d14545;
+    background-image: linear-gradient(to right, #d14545, #ff9933);
     border-radius: 5px;
     cursor: pointer;
   }

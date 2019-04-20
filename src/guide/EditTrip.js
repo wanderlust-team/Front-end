@@ -16,6 +16,8 @@ function EditTrip(props) {
   const [startDate, setStartDate] = useState(today)
   const [endDate, setEndDate] = useState(today)
 
+  const id = props.match.params.id
+
   useEffect(() => {
     const getTripById = async () => {
       try {
@@ -25,9 +27,7 @@ function EditTrip(props) {
           }
         }
         const response = await axios.get(
-          `https://build-week-wanderlust.herokuapp.com/api/trips/${
-            props.match.params.id
-          }`,
+          `https://build-week-wanderlust.herokuapp.com/api/trips/${id}`,
           options
         )
 
@@ -35,7 +35,6 @@ function EditTrip(props) {
         setTitle(response.data.tripName)
         setDescription(response.data.description)
         setLocation(response.data.location)
-
       } catch (error) {
         console.error(error)
       }
@@ -63,13 +62,11 @@ function EditTrip(props) {
       }
 
       await axios.put(
-        `https://build-week-wanderlust.herokuapp.com/api/trips/${
-          props.match.params.id
-        }`,
+        `https://build-week-wanderlust.herokuapp.com/api/trips/${id}`,
         newTrip,
         options
       )
-      props.history.push('/trips')
+      props.history.push('/guide')
     } catch (error) {
       console.error(error)
     }
@@ -78,6 +75,8 @@ function EditTrip(props) {
   return (
     <>
       <Navigation {...props} />
+
+      <H1>Trip overview</H1>
 
       <Form onSubmit={submitEditTrip}>
         <label>
@@ -92,7 +91,11 @@ function EditTrip(props) {
 
         <label>
           Description
-          <textarea onChange={e => setDescription(e.target.value)} required />
+          <textarea
+            onChange={e => setDescription(e.target.value)}
+            value={description}
+            required
+          />
         </label>
 
         <label>
@@ -125,7 +128,16 @@ function EditTrip(props) {
           />
         </label>
 
-        <Button>Save Changes</Button>
+        <ButtonsContainer>
+          <CancelButton
+            type="button"
+            onClick={() => props.history.push('/guide')}
+          >
+            Cancel
+          </CancelButton>
+
+          <SaveButton type="submit">Save</SaveButton>
+        </ButtonsContainer>
       </Form>
     </>
   )
@@ -133,12 +145,17 @@ function EditTrip(props) {
 
 export default EditTrip
 
+const H1 = styled.h1`
+  width: 1000px;
+  margin: 30px auto;
+  text-align: center;
+`
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  min-height: 800px;
   width: 600px;
   margin: auto;
 
@@ -168,16 +185,35 @@ const Form = styled.form`
   }
 `
 
-const Button = styled.button`
-  height: 50px;
-  width: 400px;
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  width: 600px;
   margin: 10px auto;
+`
+
+const CancelButton = styled.button`
+  height: 50px;
+  width: 200px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: slategray;
+  border: 2px solid slategray;
+  border-radius: 5px;
+  cursor: pointer;
+`
+
+const SaveButton = styled.button`
+  height: 50px;
+  width: 200px;
   outline: none;
   font-size: 18px;
   font-weight: 500;
   color: white;
-  background-color: mediumseagreen;
-  border: 1px solid mediumseagreen;
+  background-color: #d14545;
+  background-image: linear-gradient(to right, #d14545, #ff9933);
   border-radius: 5px;
   cursor: pointer;
 `

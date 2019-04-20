@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import moment from 'moment'
+import { startCase } from 'lodash'
 
 import styled from 'styled-components'
 import { Map } from 'styled-icons/boxicons-regular'
 import { Calendar } from 'styled-icons/boxicons-regular'
 
 import Navigation from '../navigation/Navigation'
-import image from '../assets/manuel-meurisse-unsplash.jpg'
 
 function TripDetail(props) {
   const [trip, setTrip] = useState({})
+  const [images, setImages] = useState([])
+
+  const id = props.match.params.id
+  const page = 1
 
   useEffect(() => {
     const getTrip = async () => {
@@ -21,9 +25,7 @@ function TripDetail(props) {
           }
         }
         const response = await axios.get(
-          `https://build-week-wanderlust.herokuapp.com/api/trips/${
-            props.match.params.id
-          }`,
+          `https://build-week-wanderlust.herokuapp.com/api/trips/${id}`,
           options
         )
         setTrip(response.data)
@@ -34,23 +36,46 @@ function TripDetail(props) {
     getTrip()
   }, [])
 
+  useEffect(() => {
+    const getImages = async () => {
+      try {
+        const options = {
+          headers: {
+            Authorization:
+              'Client-ID 5afca5fc526442a0d2db270e57a9d099901cbacab46dadec1e806eab80312e53'
+          }
+        }
+        const response = await axios.get(
+          `https://api.unsplash.com/search/photos?query=wanderlust&orientation=portrait&page=${page}`,
+          options
+        )
+        setImages(response.data.results)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    getImages()
+  }, [])
+
   return (
     <>
       <Navigation {...props} />
 
       <TripContainer>
-        <img
-          src={image}
-          alt="woman sitting on cliff overlooking body of water near mountains during daytime"
-        />
+        {images.length && (
+          <img
+            src={images[(id - 1) % 10].urls.small}
+            alt={images[(id - 1) % 10].alt_description}
+          />
+        )}
 
         <div>
-          <h1>{trip.tripName}</h1>
+          <h1>{startCase(trip.tripName)}</h1>
 
           <Summary>
             <p>
               <StyledMap size="24" />
-              {trip.location}
+              {startCase(trip.location)}
             </p>
             <p>
               <StyledCalendar size="24" />

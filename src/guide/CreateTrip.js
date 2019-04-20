@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import moment from 'moment'
-import Calendar from 'react-calendar'
+import { formatDate } from 'react-day-picker/moment'
 import styled from 'styled-components'
+import DayPickerInput from 'react-day-picker/DayPickerInput'
+import 'react-day-picker/lib/style.css'
 
 import Navigation from '../navigation/Navigation'
 
@@ -22,8 +23,8 @@ function CreateTrip(props) {
       tripName: title,
       description,
       location,
-      startDate: Number(moment(startDate).format('YYYYMMDD')),
-      endDate: Number(moment(endDate).format('YYYYMMDD')),
+      startDate: Number(formatDate(endDate, 'YYYYMMDD')),
+      endDate: Number(formatDate(endDate, 'YYYYMMDD')),
       userId: localStorage.getItem('userId')
     }
 
@@ -44,10 +45,14 @@ function CreateTrip(props) {
       console.error(error)
     }
   }
-
   return (
     <>
       <Navigation {...props} />
+
+      <HeaderContainer>
+        <h1>Plan your next experience</h1>
+        <p>Make new friends and don't forget to invite the existing ones!</p>
+      </HeaderContainer>
 
       <Form onSubmit={submitCreateTrip}>
         <label>
@@ -58,11 +63,6 @@ function CreateTrip(props) {
             type="text"
             required
           />
-        </label>
-
-        <label>
-          Description
-          <textarea onChange={e => setDescription(e.target.value)} required />
         </label>
 
         <label>
@@ -77,25 +77,45 @@ function CreateTrip(props) {
 
         <label>
           Start
-          <Calendar
-            calendarType="US"
-            onChange={date => setStartDate(date)}
-            value={startDate}
-            minDate={today}
+          <DayPickerInput
+            onDayChange={date => setStartDate(date)}
+            format="MMM Do, YYYY"
+            formatDate={formatDate}
+            placeholder="from"
+            dayPickerProps={{
+              disabledDays: { before: today }
+            }}
           />
         </label>
 
         <label>
           End
-          <Calendar
-            calendarType="US"
-            onChange={date => setEndDate(date)}
-            value={endDate}
-            minDate={startDate}
+          <DayPickerInput
+            onDayChange={date => setEndDate(date)}
+            format="MMM Do, YYYY"
+            formatDate={formatDate}
+            placeholder="on"
+            dayPickerProps={{
+              disabledDays: { before: startDate }
+            }}
           />
         </label>
 
-        <Button>Create Trip</Button>
+        <label>
+          Description
+          <textarea onChange={e => setDescription(e.target.value)} required />
+        </label>
+
+        <ButtonsContainer>
+          <CancelButton
+            type="button"
+            onClick={() => props.history.push('/trips')}
+          >
+            Cancel
+          </CancelButton>
+
+          <CreateButton type="submit">Create Trip</CreateButton>
+        </ButtonsContainer>
       </Form>
     </>
   )
@@ -103,12 +123,17 @@ function CreateTrip(props) {
 
 export default CreateTrip
 
+const HeaderContainer = styled.div`
+  width: 1000px;
+  margin: 30px auto;
+  text-align: center;
+`
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  min-height: 800px;
   width: 600px;
   margin: auto;
 
@@ -138,16 +163,36 @@ const Form = styled.form`
   }
 `
 
-const Button = styled.button`
-  height: 50px;
-  width: 400px;
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  width: 600px;
   margin: 10px auto;
+`
+
+const CancelButton = styled.button`
+  height: 50px;
+  width: 200px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: slategray;
+  border: 2px solid slategray;
+  border-radius: 5px;
+  cursor: pointer;
+`
+
+const CreateButton = styled.button`
+  height: 50px;
+  width: 200px;
   outline: none;
   font-size: 18px;
   font-weight: 500;
   color: white;
-  background-color: mediumseagreen;
-  border: 1px solid mediumseagreen;
+  background-color: #d14545;
+  background-image: linear-gradient(to right, #d14545, #ff9933);
+  border: 2px solid #d14545;
   border-radius: 5px;
   cursor: pointer;
 `

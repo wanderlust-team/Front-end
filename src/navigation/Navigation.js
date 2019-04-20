@@ -22,14 +22,14 @@ function Navigation({ history }) {
         </Link>
 
         <div>
-          <StyledLink to="/create-trip">Create a Trip</StyledLink>
+          <CreateTripLink to="/create-trip">Create a Trip</CreateTripLink>
           <StyledPersonPin size="36" onClick={() => setIsOpen(!isOpen)} />
         </div>
       </Header>
 
       {isOpen && (
         <MenuContainer>
-          <Link to="/guide">My Trips</Link>
+          <MyTripsLink to="/guide">My Trips</MyTripsLink>
           <p onClick={() => logout()}>Logout</p>
         </MenuContainer>
       )}
@@ -46,7 +46,7 @@ const Header = styled.header`
   height: 50px;
   padding: 15px 0;
   margin-bottom: 20px;
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid gainsboro;
 
   img {
     margin-left: 20px;
@@ -60,17 +60,29 @@ const Header = styled.header`
   }
 `
 
-const StyledLink = styled(Link)`
+const CreateTripLink = styled(Link)`
   text-decoration: none;
   color: black;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
-    padding-bottom: 10px;
-    border-bottom: 1px solid mediumseagreen;
+    border-bottom: 3px solid slategray;
   }
 `
 
 const StyledPersonPin = styled(PersonPin)`
   cursor: pointer;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    border-bottom: 3px solid slategray;
+  }
 `
 
 const MenuContainer = styled.div`
@@ -80,13 +92,38 @@ const MenuContainer = styled.div`
   align-items: center;
   position: absolute;
   top: 80px;
-  right: 5px;
+  right: 1px;
   width: 100px;
   box-shadow: 0px 0px 10px 0px gainsboro;
 
   p {
-    padding: 10px 0;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0;
     cursor: pointer;
+    border-bottom: 1px solid gainsboro;
+
+    &:hover {
+      border-bottom: 1px solid slategray;
+    }
+  }
+`
+
+const MyTripsLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid gainsboro;
+
+  &:hover {
+    border-bottom: 1px solid slategray;
   }
 `
