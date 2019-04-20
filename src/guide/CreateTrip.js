@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import moment from 'moment'
-import Calendar from 'react-calendar'
+import { formatDate } from 'react-day-picker/moment'
 import styled from 'styled-components'
+import DayPickerInput from 'react-day-picker/DayPickerInput'
+import 'react-day-picker/lib/style.css'
 
 import Navigation from '../navigation/Navigation'
 
@@ -22,8 +23,8 @@ function CreateTrip(props) {
       tripName: title,
       description,
       location,
-      startDate: Number(moment(startDate).format('YYYYMMDD')),
-      endDate: Number(moment(endDate).format('YYYYMMDD')),
+      startDate: Number(formatDate(endDate, 'YYYYMMDD')),
+      endDate: Number(formatDate(endDate, 'YYYYMMDD')),
       userId: localStorage.getItem('userId')
     }
 
@@ -44,7 +45,6 @@ function CreateTrip(props) {
       console.error(error)
     }
   }
-
   return (
     <>
       <Navigation {...props} />
@@ -66,11 +66,6 @@ function CreateTrip(props) {
         </label>
 
         <label>
-          Description
-          <textarea onChange={e => setDescription(e.target.value)} required />
-        </label>
-
-        <label>
           Location
           <input
             onChange={e => setLocation(e.target.value)}
@@ -82,22 +77,33 @@ function CreateTrip(props) {
 
         <label>
           Start
-          <Calendar
-            calendarType="US"
-            onChange={date => setStartDate(date)}
-            value={startDate}
-            minDate={today}
+          <DayPickerInput
+            onDayChange={date => setStartDate(date)}
+            format="MMM Do, YYYY"
+            formatDate={formatDate}
+            placeholder="from"
+            dayPickerProps={{
+              disabledDays: { before: today }
+            }}
           />
         </label>
 
         <label>
           End
-          <Calendar
-            calendarType="US"
-            onChange={date => setEndDate(date)}
-            value={endDate}
-            minDate={startDate}
+          <DayPickerInput
+            onDayChange={date => setEndDate(date)}
+            format="MMM Do, YYYY"
+            formatDate={formatDate}
+            placeholder="on"
+            dayPickerProps={{
+              disabledDays: { before: startDate }
+            }}
           />
+        </label>
+
+        <label>
+          Description
+          <textarea onChange={e => setDescription(e.target.value)} required />
         </label>
 
         <ButtonsContainer>
@@ -128,7 +134,6 @@ const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  min-height: 800px;
   width: 600px;
   margin: auto;
 
@@ -187,6 +192,7 @@ const CreateButton = styled.button`
   color: white;
   background-color: #d14545;
   background-image: linear-gradient(to right, #d14545, #ff9933);
+  border: 2px solid #d14545;
   border-radius: 5px;
   cursor: pointer;
 `
