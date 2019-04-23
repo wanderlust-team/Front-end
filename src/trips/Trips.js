@@ -13,7 +13,6 @@ function Trips(props) {
   const [trips, setTrips] = useState([])
   const [images, setImages] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-
   const page = 1
 
   useEffect(() => {
@@ -36,11 +35,10 @@ function Trips(props) {
         setIsLoading(false)
       }
     }
-    getTrips()
-  }, [])
 
-  useEffect(() => {
     const getImages = async () => {
+      setIsLoading(true)
+
       try {
         const options = {
           headers: {
@@ -53,10 +51,14 @@ function Trips(props) {
           options
         )
         setImages(response.data.results)
+        setIsLoading(false)
       } catch (error) {
         console.error(error)
+        setIsLoading(false)
       }
     }
+
+    getTrips()
     getImages()
   }, [])
 
