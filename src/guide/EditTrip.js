@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import moment from 'moment'
-import Calendar from 'react-calendar'
+import { formatDate } from 'react-day-picker/moment'
+import DayPickerInput from 'react-day-picker/DayPickerInput'
 import styled from 'styled-components'
 
 import Navigation from '../navigation/Navigation'
@@ -49,8 +49,8 @@ function EditTrip(props) {
       tripName: title,
       description,
       location,
-      startDate: Number(moment(startDate).format('YYYYMMDD')),
-      endDate: Number(moment(endDate).format('YYYYMMDD')),
+      startDate: Number(formatDate(endDate, 'YYYYMMDD')),
+      endDate: Number(formatDate(endDate, 'YYYYMMDD')),
       userId: localStorage.getItem('userId')
     }
 
@@ -110,21 +110,29 @@ function EditTrip(props) {
 
         <label>
           Start
-          <Calendar
-            calendarType="US"
-            onChange={date => setStartDate(date)}
+          <DayPickerInput
+            onDayChange={date => setStartDate(date)}
             value={startDate}
-            minDate={today}
+            format="ddd, MMM Do, YYYY"
+            formatDate={formatDate}
+            placeholder="from"
+            dayPickerProps={{
+              disabledDays: { before: today }
+            }}
           />
         </label>
 
         <label>
           End
-          <Calendar
-            calendarType="US"
-            onChange={date => setEndDate(date)}
+          <DayPickerInput
+            onDayChange={date => setEndDate(date)}
             value={endDate}
-            minDate={startDate}
+            format="ddd, MMM Do, YYYY"
+            formatDate={formatDate}
+            placeholder="on"
+            dayPickerProps={{
+              disabledDays: { before: startDate }
+            }}
           />
         </label>
 

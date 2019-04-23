@@ -79,7 +79,7 @@ function CreateTrip(props) {
           Start
           <DayPickerInput
             onDayChange={date => setStartDate(date)}
-            format="MMM Do, YYYY"
+            format="ddd, MMM Do, YYYY"
             formatDate={formatDate}
             placeholder="from"
             dayPickerProps={{
@@ -92,7 +92,7 @@ function CreateTrip(props) {
           End
           <DayPickerInput
             onDayChange={date => setEndDate(date)}
-            format="MMM Do, YYYY"
+            format="ddd, MMM Do, YYYY"
             formatDate={formatDate}
             placeholder="on"
             dayPickerProps={{
